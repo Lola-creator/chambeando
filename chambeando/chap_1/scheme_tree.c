@@ -63,7 +63,7 @@ int main(){
 
     liberar(valor);
     free(num);
-    //probando probando, luego borrar
+    
     
     return 0;
 }
