@@ -8,11 +8,11 @@ struct listNode
 };
 
 typedef struct listNode ListNode;
-typdef ListNode * ListNodePtr; 
+typedef ListNode * ListNodePtr; 
 
 void insert(ListNodePtr * sPtr, char value)
 {
-    ListNodePtr newPtr = malloc(sizeof(ListNode));
+    ListNodePtr newPtr = (ListNodePtr)malloc(sizeof(ListNode));
     
     if(newPtr != NULL)
     {
@@ -47,12 +47,12 @@ void insert(ListNodePtr * sPtr, char value)
     }
 }
 
-void delete(ListNodePtr * sPtr, char hao)
+void borrar(ListNodePtr * sPtr, char hao)
 {
   ListNodePtr previous = NULL;
   ListNodePtr currentPtr = (*sPtr);
 
-  while((*currentPtr).value != hao && currentPtr != NULL)
+  while((*currentPtr).data != hao && currentPtr != NULL)
   {
     previous = currentPtr;
     currentPtr = (*currentPtr).nextPtr;
@@ -86,7 +86,7 @@ void imprimir(ListNodePtr * sPtr)
 
   while(currentPtr !=NULL)
   {
-    printf("%d:   %c\n", i, (*currentPtr).value);
+    printf("%d:   %c\n", i, (*currentPtr).data);
     currentPtr = (*currentPtr).nextPtr; 
     i++;
   }
@@ -97,8 +97,54 @@ int main()
 {
     ListNodePtr startPtr = NULL;
     char item = 'n';
+    char key = '1';
 
-    insert(&startPtr, item);
+    while(key != '4')
+    {
+      puts("Select option: ");
+      key = getchar();
+      while(getchar() != '\n');
+
+      switch(key)
+      {
+        case '1':
+          puts("Insert item: ");
+          item = getchar();
+          while(getchar() != '\n');
+          insert(&startPtr, item);
+          break;
+
+        case '2':
+          puts("Delete item: ");
+          item = getchar();
+          while(getchar() != '\n');
+
+          borrar(&startPtr, item);
+          break;
+
+        case '3':
+          puts("Print\n");
+          item = getchar();
+          while(getchar() != '\n');
+
+          imprimir(&startPtr);
+          break;
+
+        case'4':
+          puts("end\n");
+          
+          break;
+
+        default:
+          puts("que pasa, solo es 1 - 2 - 3 - 4  no more\n");
+          puts("again\n");
+         
+          break;
+      } 
+
+    }
+
+   
 
     return 0;
 }
