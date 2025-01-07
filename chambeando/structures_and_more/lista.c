@@ -47,9 +47,49 @@ void insert(ListNodePtr * sPtr, char value)
     }
 }
 
-void delete(ListNodePtr * sPtr, char value)
+void delete(ListNodePtr * sPtr, char hao)
 {
-  
+  ListNodePtr previous = NULL;
+  ListNodePtr currentPtr = (*sPtr);
+
+  while((*currentPtr).value != hao && currentPtr != NULL)
+  {
+    previous = currentPtr;
+    currentPtr = (*currentPtr).nextPtr;
+  }
+
+  if(currentPtr != NULL)
+  {
+    if(previous != NULL)
+    {
+      (*previous).nextPtr = (*currentPtr).nextPtr;
+    }
+    else
+    {
+      (*sPtr) = (*currentPtr).nextPtr;
+    }
+
+    free(currentPtr);
+  }
+  else
+  {
+    printf("NO deletion\n");
+  }
+
+}
+
+void imprimir(ListNodePtr * sPtr)
+{
+
+  ListNodePtr currentPtr = (*sPtr);
+  int i =1;
+
+  while(currentPtr !=NULL)
+  {
+    printf("%d:   %c\n", i, (*currentPtr).value);
+    currentPtr = (*currentPtr).nextPtr; 
+    i++;
+  }
 
 }
 
