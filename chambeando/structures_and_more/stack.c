@@ -43,12 +43,16 @@ void push(StackNodePtr *tail, int value)
 void pop(StackNodePtr * tail, int value)
 {
   StackNodePtr temp = *tail;
-  (*tail) = (*tail)->nextPtr;
 
-  if( (temp)->data!=value)
-    {
-    pop(tail, value);
-    }
+  if((*tail)!= NULL)
+  {
+      (*tail) = (*tail)->nextPtr;
+
+      if( (temp)->data!=value)
+      {
+        pop(tail, value);
+      }
+  }
   free(temp);
 }
 
@@ -58,6 +62,10 @@ void imprimir(StackNodePtr * tail)
   {
     imprimir(&((*tail)->nextPtr));
     printf("%d  valor\n",(*tail)->data);
+  }
+  else
+  {
+  printf("STACK EMPTY\n");
   }
 
 }
@@ -89,7 +97,7 @@ int main()
         break;
 
       case '3':
-        puts("Imprimir \n");
+        puts("Imprimir \nFrom head to tail\n");
         imprimir(&cola);
         break;
 
