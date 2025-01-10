@@ -47,9 +47,17 @@ void dequeue(QueueNodePtr * head, int value)
   free(temp);
 }
 
-void imprimir()
-{
-
+void imprimir(QueueNodePtr *head)
+{ 
+    if((*head) != NULL)
+    {
+      printf("valor: %d \n", (*head)->data);
+      imprimir(&((*head)->nextPtr) );
+    }
+    else
+    {
+      printf("QUEUE EMPTY");
+    }
 }
 
 int main()
@@ -57,13 +65,59 @@ int main()
   QueueNodePtr cabeza = NULL;
   QueueNodePtr cola = NULL;
 
-  if(cabeza  == NULL && cola != NULL)
+  int valor = 0;
+  char key = '1';
+  int flag = 0;
+
+  while(key != '4')
   {
-    cabeza = cola;
-  }
-  else
-  {
-    printf("queue empty\n");
+    puts("select option: ");
+    key = getchar();
+    while(getchar()!= '\n');
+
+    switch(key)
+    {
+      case '1':
+        puts("Enqueue item: ");
+        scanf("%d",&valor);
+        enqueue(&cola, valor);
+        break;
+
+      case '2':
+        if(flag)
+        {
+        puts("Dequeue item: ");
+        scanf("%d", &valor);
+        dequeue(&cabeza, valor);
+        break;
+        }
+        else
+        {
+          puts("CANNOT DEQUEUE, QUEUE EMPTY\n");
+          break;
+        }
+      case '3':
+        puts("Imprimir \n\n");
+        imprimir(&cabeza);
+        break;
+
+      case '4':
+        puts("SALIR\n");
+        break;
+
+      default:
+        puts("Number no valid\nagain\n");
+        break;
+    }
+
+    while(getchar()!= '\n');
+
+    if((cabeza)  == NULL && (cola) != NULL)
+    {
+     (cabeza) = (cola);
+     flag =1;
+    }
+
   }
 
   return 0;
